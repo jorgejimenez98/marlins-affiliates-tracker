@@ -11,7 +11,7 @@ export function Header() {
   return (
     <header
       className={cn(
-        "flex items-center justify-between px-4 lg:px-6 py-3 sticky top-0 z-50 w-full transition-all duration-200",
+        "flex items-center justify-between px-4 sm:px-0 py-3 sticky top-0 z-50 w-full transition-all duration-200",
         scrolled ? "bg-background/95 backdrop-blur-md border-b border-border/50 shadow-b-sm" : "bg-transparent"
       )}
     >

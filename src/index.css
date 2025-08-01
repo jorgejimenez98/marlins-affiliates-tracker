@@ -35,7 +35,7 @@
   --color-input: var(--input);
   --color-ring: var(--ring);
 
-  --container-content: 1480px;
+  --container-content: 1280px;
 }
 
 :root {
@@ -120,15 +120,6 @@
   }
 }
 
-@utility bg-marlins-gradient {
-  background: linear-gradient(
-    135deg,
-    var(--color-marlins-blue) 0%,
-    var(--color-marlins-red) 50%,
-    var(--color-marlins-black) 100%
-  );
-}
-
 @utility text-marlins-gradient {
   background: linear-gradient(
     135deg,
@@ -139,6 +130,15 @@
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
+}
+
+@utility bg-marlins-gradient {
+  background: linear-gradient(
+    135deg,
+    var(--color-marlins-blue) 0%,
+    var(--color-marlins-red) 50%,
+    var(--color-marlins-black) 100%
+  );
 }
 
 @utility border-marlins-gradient {
