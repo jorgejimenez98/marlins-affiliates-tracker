@@ -1,62 +1,49 @@
-import { useState } from "react"
 
-import { Moon, RefreshCw, Sun } from "lucide-react"
+import { HeaderRefreshButton, HeaderThemeButton } from "./components"
 
-import { Button, Image } from "@/components/ui"
+import { Image } from "@/components/ui"
+import { useScrolled } from "@/hooks"
 import { UI } from "@/lib/constants"
-import { useTheme } from "@/providers/theme-provider"
+import { cn } from "@/lib/utils"
 
 export function Header() {
-  const { theme, setTheme } = useTheme()
-  const [isRefreshing, setIsRefreshing] = useState(false)
-
-  const handleRefresh = () => {
-    setIsRefreshing(true)
-    setTimeout(() => {
-      console.warn("Reload")
-    }, 500)
-  }
-
+  const scrolled = useScrolled(10)
 
   return (
-    <header className="flex justify-between mt-5">
+    <header
+      className={cn(
+        "flex items-center justify-between px-4 lg:px-6 py-3 sticky top-0 z-50 w-full transition-all duration-200",
+        scrolled ? "bg-background/95 backdrop-blur-md border-b border-border/50 shadow-b-sm" : "bg-transparent"
+      )}
+    >
       {/* Logo */}
-      <Image
-        src={UI.IMAGES.LOGO}
-        width={50}
-        height={50}
-        alt="Miami Marlins Logo"
-      />
+      <div className="flex items-center gap-3">
+        <Image
+          src={UI.IMAGES.LOGO}
+          width={40}
+          height={40}
+          alt="Miami Marlins Logo"
+        />
+
+        <div>
+          <p className="text-lg font-semibold text-foreground">
+            Miami Marlins
+          </p>
+
+          <p className="text-xs text-muted-foreground -mt-1">
+            Game Scheduler
+          </p>
+        </div>
+      </div>
 
       {/* Actions */}
       <div className="w-fit px-4 flex gap-2 p-2 rounded-full border">
         {/* Refresh */}
-        <Button
-          size="icon"
-          variant="outline"
-          onClick={handleRefresh}
-          disabled={isRefreshing}
-        >
-          <RefreshCw className={`${isRefreshing ? "animate-spin" : ""}`} />
-          <span className="sr-only">Refresh page</span>
-        </Button>
+        <HeaderRefreshButton />
 
         {/* Theme */}
-        <Button
-          size="icon"
-          variant="outline"
-          onClick={() => setTheme(theme === "light" ? "dark" : "light")}
-        >
-          <Sun className="rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0 text-marlins-blue" />
-
-          <Moon className="absolute rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100 text-white" />
-
-          <span className="sr-only">
-          Toggle theme
-          </span>
-        </Button>
+        <HeaderThemeButton />
       </div>
-
     </header>
   )
 }

@@ -3,6 +3,7 @@ import { Suspense } from "react"
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
 import { BrowserRouter, Routes } from "react-router-dom"
 
+import { ScrollToTop } from "./components/common"
 import { Footer, Header } from "./components/layouts"
 import { Loader } from "./components/ui"
 import { useApplicationRoutes } from "./hooks"
@@ -19,19 +20,22 @@ export function App() {
 
         <ThemeProvider defaultTheme="system">
           <Suspense fallback={<Loader />}>
-            <div className="max-w-content mx-auto flex flex-col gap-3">
+            <div className="relative flex min-h-screen flex-col max-w-content mx-auto">
               {/* Header */}
               <Header />
 
               {/* Content */}
               <main className="flex-1">
-                <Routes>
-                  {pageRoutes}
-                </Routes>
+                <div className="flex flex-col gap-3 px-3">
+                  <Routes>{pageRoutes}</Routes>
+                </div>
               </main>
 
               {/* Footer */}
               <Footer />
+
+              {/* Wrappers */}
+              <ScrollToTop />
             </div>
           </Suspense>
         </ThemeProvider>

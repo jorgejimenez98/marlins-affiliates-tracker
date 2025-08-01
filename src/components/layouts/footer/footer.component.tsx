@@ -1,4 +1,3 @@
-
 import { cn } from "@/lib/utils"
 
 export function Footer() {
@@ -6,12 +5,11 @@ export function Footer() {
 
   return (
     <footer
-      className={cn("flex flex-col border-t mt-16")}
+      className={cn("border-t py-6 text-center text-muted-foreground")}
       aria-label="Site footer"
     >
-      {/* Copyright */}
-      <p className="text-sm text-center mt-4">
-          © {currentYear} All rights reserved
+      <p className="text-sm">
+        © {currentYear} All rights reserved
       </p>
     </footer>
   )

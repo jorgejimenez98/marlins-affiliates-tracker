@@ -1,6 +1,6 @@
-@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Titillium+Web:wght@400;600&display=swap');
-@import "tailwindcss";
-@import "tw-animate-css";
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700&display=swap');
+@import 'tailwindcss';
+@import 'tw-animate-css';
 
 @custom-variant dark (&:is(.dark *));
 
@@ -10,7 +10,6 @@
   --color-marlins-black: #0f0708;
   --color-marlins-grey: #41748d;
   --color-marlins-orange: #ff6600;
-
 
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
@@ -40,27 +39,27 @@
 }
 
 :root {
-  --font-sans: 'Titillium Web', sans-serif;
+  --font-sans: 'Inter', sans-serif;
   --font-display: 'Bebas Neue', sans-serif;
 
   --radius: 0.625rem;
-  --background: oklch(1 0 0);
+  --background: oklch(0.84 0.01 260);
   --foreground: oklch(0.13 0.028 261.692);
-  --card: oklch(1 0 0);
+  --card: oklch(0.88 0.008 265);
   --card-foreground: oklch(0.13 0.028 261.692);
-  --popover: oklch(1 0 0);
+  --popover: oklch(0.88 0.008 265);
   --popover-foreground: oklch(0.13 0.028 261.692);
   --primary: oklch(0.21 0.034 264.665);
   --primary-foreground: oklch(0.985 0.002 247.839);
   --secondary: oklch(0.967 0.003 264.542);
   --secondary-foreground: oklch(0.21 0.034 264.665);
-  --muted: oklch(0.967 0.003 264.542);
+  --muted: oklch(0.82 0.005 264.542);
   --muted-foreground: oklch(0.551 0.027 264.364);
   --accent: oklch(0.967 0.003 264.542);
   --accent-foreground: oklch(0.21 0.034 264.665);
   --destructive: oklch(0.577 0.245 27.325);
-  --border: oklch(0.928 0.006 264.531);
-  --input: oklch(0.928 0.006 264.531);
+  --border: oklch(0.78 0.01 264.531);
+  --input: oklch(0.78 0.01 264.531);
   --ring: oklch(0.707 0.022 261.325);
 }
 
@@ -95,12 +94,32 @@
     @apply bg-background text-foreground;
   }
 
-  h1, h2, .font-display {
+  h1,
+  h2,
+  .font-display {
     font-family: var(--font-display);
+  }
+
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: var(--background);
+    border-radius: var(--radius);
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: var(--color-marlins-blue);
+    border-radius: var(--radius);
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--ring);
   }
 }
 
-/* Custom utilities */
 @utility bg-marlins-gradient {
   background: linear-gradient(
     135deg,
@@ -133,5 +152,10 @@
 }
 
 @utility bg-marlins-field {
-  background: radial-gradient(circle at center, transparent 20%, rgba(0, 163, 224, 0.1) 50%, transparent 80%);
+  background: radial-gradient(
+    circle at center,
+    transparent 20%,
+    rgba(0, 163, 224, 0.1) 50%,
+    transparent 80%
+  );
 }
