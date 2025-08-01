@@ -124,7 +124,7 @@
   background: linear-gradient(
     135deg,
     var(--color-marlins-blue) 0%,
-    var(--color-marlins-red) 50%,
+    var(--color-marlins-red) 95%,
     var(--color-marlins-black) 100%
   );
   -webkit-background-clip: text;
@@ -158,4 +158,12 @@
     rgba(0, 163, 224, 0.1) 50%,
     transparent 80%
   );
+}
+
+@utility hover-default {
+  @apply cursor-pointer rounded-lg transition-all duration-200 ease-[cubic-bezier(0.165,0.84,0.44,1)] outline outline-[rgba(0,72,255,0.071)];
+
+  &:hover {
+    @apply outline-[8px] outline-[rgba(0,72,255,0.071)] duration-100;
+  }
 }

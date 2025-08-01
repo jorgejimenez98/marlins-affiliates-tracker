@@ -1,3 +1,6 @@
+import { Heart } from "lucide-react"
+
+import { UI } from "@/lib/constants"
 import { cn } from "@/lib/utils"
 
 export function Footer() {
@@ -5,11 +8,23 @@ export function Footer() {
 
   return (
     <footer
-      className={cn("border-t py-6 text-center text-muted-foreground")}
+      className={cn("border-t py-6 text-center text-muted-foreground space-y-1")}
       aria-label="Site footer"
     >
       <p className="text-sm">
-        © {currentYear} All rights reserved
+        &copy; {currentYear} All rights reserved
+      </p>
+
+      <p className="text-sm flex justify-center items-center gap-2">
+        Made with <Heart className="size-3 text-destructive"/> by
+        <a
+          href={UI.LINKS.LINKEDIN}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="font-medium text-marlins-gradient hover-default"
+        >
+          Jorge Jimenez
+        </a>
       </p>
     </footer>
   )

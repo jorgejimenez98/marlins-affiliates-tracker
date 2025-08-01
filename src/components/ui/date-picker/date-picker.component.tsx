@@ -91,7 +91,7 @@ export function DatePicker({
           variant={"outline"}
           disabled={disabled}
           className={cn(
-            "relative w-full sm:w-fit flex justify-start items-center p-1 rounded-md border min-h-10 h-auto  bg-inherit hover:bg-inherit [&_svg]:pointer-events-auto",
+            "relative w-full sm:w-fit flex justify-start items-center p-1 rounded-md border min-h-10 h-auto  bg-inherit [&_svg]:pointer-events-auto",
             className
           )}
         >

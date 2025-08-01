@@ -1,8 +1,10 @@
+import { Link } from "react-router-dom"
+
 import { HeaderRefreshButton, HeaderThemeButton } from "./components"
 
 import { Image } from "@/components/ui"
 import { useScrolled } from "@/hooks"
-import { UI } from "@/lib/constants"
+import { PAGE_URLS, UI } from "@/lib/constants"
 import { cn } from "@/lib/utils"
 
 export function Header() {
@@ -17,12 +19,15 @@ export function Header() {
     >
       {/* Logo */}
       <div className="flex items-center gap-3">
-        <Image
-          src={UI.IMAGES.LOGO}
-          width={40}
-          height={40}
-          alt="Miami Marlins Logo"
-        />
+        <Link to={PAGE_URLS.SCHEDULE}>
+          <Image
+            src={UI.IMAGES.LOGO}
+            width={40}
+            height={40}
+            alt="Miami Marlins Logo"
+            className="hover-default"
+          />
+        </Link>
 
         <div>
           <p className="text-lg font-semibold text-foreground">

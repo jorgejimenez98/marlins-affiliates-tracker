@@ -1,6 +1,8 @@
 export const PAGE_URLS = {
   INITIAL: "/",
 
+  NOT_FOUND: "*",
+
   SCHEDULE: "/schedule"
 }
 
