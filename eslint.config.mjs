@@ -91,6 +91,7 @@ export default [
 
       // Disables namespace import checks
       "import/namespace": "off",
+      "import/named": "off",
 
       // Disallows console statements except for warnings and errors
       "no-console": ["error", {

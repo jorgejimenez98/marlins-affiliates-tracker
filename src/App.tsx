@@ -1,17 +1,33 @@
-import { useState } from "react"
+import { Suspense } from "react"
 
-import { Button } from "./components/ui"
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
+import { BrowserRouter, Routes } from "react-router-dom"
+
+import { Flex } from "./components/layouts"
+import { Loader } from "./components/ui"
+import { useApplicationRoutes } from "./hooks"
+
+const queryClient = new QueryClient()
 
 export function App() {
-  const [count, setCount] = useState(0)
+  const pageRoutes = useApplicationRoutes()
 
-  return <>
-    <div className="flex justify-center items-center flex-col gap-2 min-h-screen">
-      Content here..s
+  return (
+    <QueryClientProvider client={queryClient}>
+      <BrowserRouter>
+        <Suspense fallback={<Loader />}>
+          <Flex dir='col'>
+            <p>Header here....</p>
 
-      <Button onClick={() => setCount(count => count + 1)}>
-        count is {count}
-      </Button>
-    </div>
-  </>
+            {/* Content */}
+            <Routes>
+              {pageRoutes}
+            </Routes>
+
+            <p>Footer here...</p>
+          </Flex>
+        </Suspense>
+      </BrowserRouter>
+    </QueryClientProvider>
+  )
 }
