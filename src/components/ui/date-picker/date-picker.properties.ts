@@ -53,6 +53,7 @@ export interface DatePickerHookReturn {
 export interface CalendarViewProps {
   currentDate: Date
   selectedDate: Date | null
+  clearEnabled?: boolean
   onDateSelect: (date: Date | null) => void
   onMonthClick: () => void
   onYearClick: () => void

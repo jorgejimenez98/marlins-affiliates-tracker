@@ -15,6 +15,7 @@ import { cn } from "@/lib/utils"
 export function CalendarView({
   currentDate,
   selectedDate,
+  clearEnabled,
   onDateSelect,
   onMonthClick,
   onYearClick,
@@ -101,10 +102,13 @@ export function CalendarView({
       </div>
 
       {/* Agregar footer con botón Clear */}
-      <div className="border-t flex justify-between pt-2">
-        <Button type="button" variant="outline" size="sm" onClick={() => onDateSelect(null)} >
-          Clear
-        </Button>
+      <div className={`border-t flex ${clearEnabled ? "justify-between" : "justify-end"} pt-2`}>
+        {clearEnabled && (
+          <Button type="button" variant="outline" size="sm" onClick={() => onDateSelect(null)} >
+            Clear
+          </Button>
+        )}
+
 
         <Button type="button" size="sm" onClick={() => onDateSelect(new Date())} >
           Today
