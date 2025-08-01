@@ -5,10 +5,18 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
+  --color-marlins-red: #ef3340;
+  --color-marlins-blue: #00a3e0;
+  --color-marlins-black: #0f0708;
+  --color-marlins-grey: #41748d;
+  --color-marlins-orange: #ff6600;
+
+
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
+
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
@@ -27,6 +35,8 @@
   --color-border: var(--border);
   --color-input: var(--input);
   --color-ring: var(--ring);
+
+  --container-content: 1480px;
 }
 
 :root {
@@ -88,4 +98,40 @@
   h1, h2, .font-display {
     font-family: var(--font-display);
   }
+}
+
+/* Custom utilities */
+@utility bg-marlins-gradient {
+  background: linear-gradient(
+    135deg,
+    var(--color-marlins-blue) 0%,
+    var(--color-marlins-red) 50%,
+    var(--color-marlins-black) 100%
+  );
+}
+
+@utility text-marlins-gradient {
+  background: linear-gradient(
+    135deg,
+    var(--color-marlins-blue) 0%,
+    var(--color-marlins-red) 50%,
+    var(--color-marlins-black) 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+@utility border-marlins-gradient {
+  border-image: linear-gradient(
+      135deg,
+      var(--color-marlins-blue) 0%,
+      var(--color-marlins-red) 50%,
+      var(--color-marlins-black) 100%
+    )
+    1;
+}
+
+@utility bg-marlins-field {
+  background: radial-gradient(circle at center, transparent 20%, rgba(0, 163, 224, 0.1) 50%, transparent 80%);
 }

@@ -3,9 +3,10 @@ import { Suspense } from "react"
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
 import { BrowserRouter, Routes } from "react-router-dom"
 
-import { Flex } from "./components/layouts"
+import { Footer, Header } from "./components/layouts"
 import { Loader } from "./components/ui"
 import { useApplicationRoutes } from "./hooks"
+import { ThemeProvider } from "./providers"
 
 const queryClient = new QueryClient()
 
@@ -15,18 +16,25 @@ export function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <BrowserRouter>
-        <Suspense fallback={<Loader />}>
-          <Flex dir='col'>
-            <p>Header here....</p>
 
-            {/* Content */}
-            <Routes>
-              {pageRoutes}
-            </Routes>
+        <ThemeProvider defaultTheme="system">
+          <Suspense fallback={<Loader />}>
+            <div className="max-w-content mx-auto flex flex-col gap-3">
+              {/* Header */}
+              <Header />
 
-            <p>Footer here...</p>
-          </Flex>
-        </Suspense>
+              {/* Content */}
+              <main className="flex-1">
+                <Routes>
+                  {pageRoutes}
+                </Routes>
+              </main>
+
+              {/* Footer */}
+              <Footer />
+            </div>
+          </Suspense>
+        </ThemeProvider>
       </BrowserRouter>
     </QueryClientProvider>
   )
