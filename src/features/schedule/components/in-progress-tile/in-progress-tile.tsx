@@ -71,7 +71,7 @@ export function InProgressTile({ game }: { game: GameSummary }) {
 
             <div className="flex justify-end items-center gap-3 relative bottom-30 sm:bottom-0 -mb-20">
               <div className="flex flex-col text-xs justify-center items-center ">
-                <span>{game.currentInning}</span>
+                <span>Inning {game.currentInning}</span>
 
                 {game.outs !== undefined && (
                   <span>{game.outs === 1 ? "1 out" : `${game.outs} outs`}</span>

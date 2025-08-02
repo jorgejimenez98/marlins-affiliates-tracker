@@ -32,7 +32,7 @@ export function GamesFilters({ selectedFilter, onFilterChange, games }: GameFilt
   return (
     <div className="mb-4 sm:mb-6">
       <div className="flex flex-wrap gap-2">
-        {filters.map(filter => (
+        {filters.filter(item => gameCounts[item.key] > 0).map(filter => (
           <Button
             key={filter.key}
             variant={selectedFilter === filter.key ? "default" : "outline"}

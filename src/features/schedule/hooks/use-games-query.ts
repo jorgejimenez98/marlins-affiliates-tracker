@@ -2,7 +2,7 @@
 import { useQuery } from "@tanstack/react-query"
 import { format } from "date-fns"
 
-import { SPORT_IDS, TEAM_IDS } from "../constants"
+import { HYDRATION_FIELDS, SPORT_IDS, TEAM_IDS } from "../constants"
 import type { GameSummary, LiveFeedResponse, ScheduleAPIResponse } from "../types"
 
 import { useTeamsInfoQuery } from "./use-teams-info"
@@ -21,6 +21,7 @@ export function useGamesQuery() {
     const params = new URLSearchParams()
     TEAM_IDS.forEach(id => params.append("teamId", id.toString()))
     SPORT_IDS.forEach(id => params.append("sportId", id.toString()))
+    HYDRATION_FIELDS.forEach(field => params.append("hydrate", field))
 
     if (dateFormatted) params.append("date", dateFormatted)
 
@@ -63,7 +64,7 @@ export function useGamesQuery() {
         case "Preview":
           summary.state = "NOT_STARTED"
           summary.venue = venue?.name
-          summary.gameTime = gameDate
+          summary.gameTime = format(gameDate, "hh:mm a")
           if (probablePitchers) {
             summary.probablePitchers = {
               home: probablePitchers?.home?.fullName,
@@ -77,23 +78,28 @@ export function useGamesQuery() {
           summary.venue = venue?.name
 
           try {
-            const { data: liveData }: { data: LiveFeedResponse } = await api.get(liveGameLink)
+            const { data: liveData }: { data: LiveFeedResponse } = await api.get(`${liveGameLink}?hydrate=plays&hydrate=runners`)
             const ls = liveData?.liveData?.linescore
 
-            summary.currentInning = `${ls?.inningHalf ?? ""} ${ls?.currentInning ?? ""}`.trim()
+            summary.currentInning = ls?.currentInningOrdinal
             summary.outs = ls?.outs
             summary.score = {
               home: ls?.teams?.home?.runs ?? 0,
               away: ls?.teams?.away?.runs ?? 0
             }
+
             summary.atBat = ls?.offense?.batter?.fullName
             summary.pitcher = ls?.offense?.pitcher?.fullName
 
-            const runners = liveData?.liveData?.plays?.currentPlay?.matchup?.runners ?? []
+            const runners = liveData?.liveData?.plays?.currentPlay?.runners ?? []
+
+            //console.log({ x: liveData?.liveData?.plays?.currentPlay })
 
             summary.runnersOnBase = runners
-              .filter(r => r.details?.isOnBase && r.movement?.end)
-              .map(r => r.movement!.end!)
+              .filter(r => !r.movement?.isOut && typeof r.movement?.end === "string")
+              .map(r => r.movement!.end)
+
+            //console.log({ o: summary.runnersOnBase })
 
           } catch {
             summary.score = {

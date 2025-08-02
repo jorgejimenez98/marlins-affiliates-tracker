@@ -21,6 +21,7 @@ export default function SchedulePage() {
 
     if (!list) return []
     if (selectedFilter === "ALL") return list
+
     return list.filter(game => game.state === selectedFilter)
   }, [gameTiles, selectedFilter])
 
@@ -51,7 +52,7 @@ export default function SchedulePage() {
           <GamesFilters
             selectedFilter={selectedFilter}
             onFilterChange={setSelectedFilter}
-            games={mockGames}
+            games={ENV.MOCK_DATA_ENABLED ? mockGames : gameTiles || []}
           />
 
           {/* Content */}

@@ -140,6 +140,7 @@ export interface LiveFeedResponse {
   liveData?: {
     linescore?: {
       currentInning?: number
+      currentInningOrdinal: string
       inningHalf?: string
       outs?: number
       teams?: {
@@ -154,12 +155,12 @@ export interface LiveFeedResponse {
 
     plays?: {
       currentPlay?: {
-        matchup?: {
-          runners?: Array<{
-            details?: { isOnBase?: boolean }
-            movement?: { end?: string }
-          }>
-        }
+        runners?: {
+          movement?: {
+            isOut?: boolean
+            end: string
+          }
+        }[]
       }
     }
   }

@@ -21,7 +21,7 @@ export function HeaderRefreshButton() {
     if (!dateFormatted) return
 
     setIsRefreshing(true)
-    await sleep(1)
+    await sleep(0.5)
     await queryClient.invalidateQueries({ queryKey: [UI.TAN_STANK_KEYS.SCHEDULE] })
 
     toast.success("Data updated sucessfully")
