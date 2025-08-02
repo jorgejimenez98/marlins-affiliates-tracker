@@ -1,6 +1,6 @@
 export const ENV = {
   BACKEND_URL: import.meta.env.VITE_BACKEND_URL,
-  USER_LOCALSTORAGE_KEY: import.meta.env.VITE_USER_LOCALSTORAGE_KEY
+  FRONTEND_URL: import.meta.env.VITE_FRONTEND_URL
 }
 
 Object.freeze(ENV)

@@ -2,11 +2,11 @@
 import { create } from "zustand"
 
 type DateStore = {
-  currentDate: Date
+  currentDate: Date | null
   onDateChange: (date: Date) => void
 }
 
 export const useDateStore = create<DateStore>(set => ({
-  currentDate: new Date(),
+  currentDate: null,
   onDateChange: date => set({ currentDate: date })
 }))

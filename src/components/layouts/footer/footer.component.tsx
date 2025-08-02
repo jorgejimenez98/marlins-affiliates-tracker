@@ -1,5 +1,3 @@
-import { Heart } from "lucide-react"
-
 import { UI } from "@/lib/constants"
 import { cn } from "@/lib/utils"
 
@@ -16,7 +14,7 @@ export function Footer() {
       </p>
 
       <p className="text-sm flex justify-center items-center gap-2">
-        Made with <Heart className="size-3 text-destructive"/> by
+        Made by
         <a
           href={UI.LINKS.LINKEDIN}
           target="_blank"

@@ -18,7 +18,7 @@ export function App() {
     <QueryClientProvider client={queryClient}>
       <BrowserRouter>
 
-        <ThemeProvider defaultTheme="system">
+        <ThemeProvider defaultTheme="dark">
           <Suspense fallback={<Loader />}>
             <div className="relative flex min-h-screen flex-col max-w-content mx-auto">
               {/* Header */}
