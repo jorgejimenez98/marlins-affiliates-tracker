@@ -1,17 +1,20 @@
-import { useState } from "react"
-
+import { useQueryClient } from "@tanstack/react-query"
+import { formatDate } from "date-fns"
 import { RefreshCw } from "lucide-react"
 
 import { Button } from "@/components/ui"
+import { UI } from "@/lib/constants"
+import { useDateStore } from "@/stores"
+
 
 export function HeaderRefreshButton() {
-  const [isRefreshing, setIsRefreshing] = useState(false)
+  const queryClient = useQueryClient()
+  const { currentDate } = useDateStore()
+  const dateFormatted = currentDate ? formatDate(currentDate, UI.DATE_FORMAT) : null
 
-  const handleRefresh = () => {
-    setIsRefreshing(true)
-    setTimeout(() => {
-      console.warn("Reload")
-    }, 500)
+  const handleRefresh = async () => {
+    if (!dateFormatted) return
+    await queryClient.invalidateQueries({ queryKey: [UI.TAN_STANK_KEYS.SCHEDULE] })
   }
 
   return (
@@ -19,9 +22,9 @@ export function HeaderRefreshButton() {
       size="icon"
       variant="outline"
       onClick={handleRefresh}
-      disabled={isRefreshing}
+      disabled={!currentDate}
     >
-      <RefreshCw className={`${isRefreshing ? "animate-spin" : ""}`} />
+      <RefreshCw />
       <span className="sr-only">Refresh page</span>
     </Button>
   )
