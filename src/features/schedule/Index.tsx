@@ -1,29 +1,29 @@
-import { useMemo, useState } from "react"
+import { useMemo } from "react"
 
 import { FinalTile, InProgressTile, GamesFilters, NoGameTile, NotStartedTile, ScheduleDateSection } from "./components"
 import { useDateListener, useGamesQuery } from "./hooks"
-import type { GameStateFilter, GameSummary } from "./types"
+import type { GameSummary } from "./types"
 
 import { Loader } from "@/components/ui"
 import { ENV } from "@/lib/constants"
 import { mockGames } from "@/lib/constants/mock-data.constants"
+import { useDateStore } from "@/stores"
 
 export default function SchedulePage() {
   // Date Check on value changes
   useDateListener()
 
+  const { selectedGameFilter } = useDateStore()
   const { data: gameTiles, isLoading, isFetching } = useGamesQuery()
-
-  const [selectedFilter, setSelectedFilter] = useState<GameStateFilter>("ALL")
 
   const filteredGames: GameSummary[] = useMemo(() => {
     const list = ENV.MOCK_DATA_ENABLED ? mockGames : gameTiles
 
     if (!list) return []
-    if (selectedFilter === "ALL") return list
+    if (selectedGameFilter === "ALL") return list
 
-    return list.filter(game => game.state === selectedFilter)
-  }, [gameTiles, selectedFilter])
+    return list.filter(game => game.state === selectedGameFilter)
+  }, [gameTiles, selectedGameFilter])
 
   return (
     <div className="flex flex-col justify-center items-center gap-2 mt-5 sm:mt-10">
@@ -50,8 +50,7 @@ export default function SchedulePage() {
 
           {/* Filters */}
           <GamesFilters
-            selectedFilter={selectedFilter}
-            onFilterChange={setSelectedFilter}
+            selectedFilter={selectedGameFilter}
             games={ENV.MOCK_DATA_ENABLED ? mockGames : gameTiles || []}
           />
 

@@ -1,17 +1,17 @@
-/* eslint-disable no-unused-vars */
 import { Circle } from "lucide-react"
 
 import type { GameStateFilter, GameSummary } from "../../types"
 
 import { Badge, Button } from "@/components/ui"
+import { useDateStore } from "@/stores"
 
 interface GameFilterProps {
     selectedFilter: GameStateFilter
-    onFilterChange: (filter: GameStateFilter) => void
     games: GameSummary[]
 }
 
-export function GamesFilters({ selectedFilter, onFilterChange, games }: GameFilterProps) {
+export function GamesFilters({ selectedFilter, games }: GameFilterProps) {
+  const { onGameFilterChange } = useDateStore()
 
   const filters: { key: GameStateFilter; label: string; icon?: React.ReactNode }[] = [
     { key: "ALL", label: "All Teams" },
@@ -37,7 +37,7 @@ export function GamesFilters({ selectedFilter, onFilterChange, games }: GameFilt
             key={filter.key}
             variant={selectedFilter === filter.key ? "default" : "outline"}
             size="sm"
-            onClick={() => onFilterChange(filter.key)}
+            onClick={() => onGameFilterChange(filter.key)}
           >
             <div className="flex items-center gap-1 sm:gap-2">
               {filter.icon}

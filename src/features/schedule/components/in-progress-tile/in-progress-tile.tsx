@@ -44,11 +44,11 @@ export function InProgressTile({ game }: { game: GameSummary }) {
 
             <div className="flex flex-col sm:flex-row sm:items-center sm:gap-5 dark:text-slate-400 mt-5">
               {game.atBat && (
-                <p>At Bat: <strong>{game.atBat}</strong></p>
+                <p>At Bat: <br className="hidden sm:block" /> <strong>{game.atBat}</strong></p>
               )}
 
               {game.pitcher && (
-                <span>Pitching: <strong>{game.pitcher}</strong></span>
+                <span>Pitching: <br className="hidden sm:block" /><strong>{game.pitcher}</strong></span>
               )}
             </div>
 
