@@ -39,12 +39,12 @@ export function BaseballDiamond({
         </div>
 
         {outs && (
-          <div className={cn("flex gap-0.5 mt-0.5", outs === 3 && "animate-pulse")}>
+          <div className={cn("flex gap-0.5 mt-0.5", +outs === 3 && "animate-pulse")}>
             {[0, 1, 2].map(item => (
               <div
                 key={item}
                 className={`w-1.5 h-1.5 rounded-full ${
-                  outs > item ? "bg-red-500" : "bg-gray-400/50"
+                  +outs > item ? "bg-red-500" : "bg-gray-400/50"
                 }`}
               />
             ))}

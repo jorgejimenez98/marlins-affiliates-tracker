@@ -1,6 +1,6 @@
 export interface BaseballDiamondProps {
     runnersOnBase?: string[]
     className?: string
-    outs?: number
+    outs?: string
     inning?: string
 }
