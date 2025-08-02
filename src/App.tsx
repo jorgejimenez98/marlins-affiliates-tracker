@@ -37,7 +37,10 @@ export function App() {
 
               {/* Wrappers */}
               <ScrollToTop />
-              <SonnerToastWrapper position="top-center" />
+              <SonnerToastWrapper
+                position="bottom-center"
+                duration={1000}
+              />
             </div>
           </Suspense>
         </ThemeProvider>

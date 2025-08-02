@@ -6,7 +6,8 @@ export const UI = {
   },
 
   TAN_STANK_KEYS: {
-    SCHEDULE: "games-schedule"
+    SCHEDULE: "games-schedule",
+    TEAMS: "teams"
   },
 
   LINKS: {

@@ -3,12 +3,12 @@ import { useQuery } from "@tanstack/react-query"
 import { TEAM_IDS } from "../constants"
 import type { SmallTeamInfo, TeamDetails } from "../types"
 
-import { ENDPOINTS } from "@/lib/constants"
+import { ENDPOINTS, UI } from "@/lib/constants"
 import { api } from "@/lib/utils"
 
 export function useTeamsInfoQuery() {
   return useQuery<SmallTeamInfo[]>({
-    queryKey: ["teams-info"],
+    queryKey: [UI.TAN_STANK_KEYS.TEAMS],
     queryFn: async () => {
       const results = await Promise.all(
         TEAM_IDS.map(async id => {

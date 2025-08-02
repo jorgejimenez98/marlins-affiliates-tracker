@@ -1,11 +1,11 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import { useMemo, useState } from "react"
 
 import { FinalTile, InProgressTile, GamesFilters, NoGameTile, NotStartedTile, ScheduleDateSection } from "./components"
 import { useDateListener, useGamesQuery } from "./hooks"
-import type { GameStateFilter } from "./types"
+import type { GameStateFilter, GameSummary } from "./types"
 
 import { Loader } from "@/components/ui"
+import { ENV } from "@/lib/constants"
 import { mockGames } from "@/lib/constants/mock-data.constants"
 
 export default function SchedulePage() {
@@ -16,10 +16,13 @@ export default function SchedulePage() {
 
   const [selectedFilter, setSelectedFilter] = useState<GameStateFilter>("ALL")
 
-  const filteredGames = useMemo(() => {
-    if (selectedFilter === "ALL") return mockGames
-    return mockGames.filter(game => game.state === selectedFilter)
-  }, [gameTiles, mockGames, selectedFilter])
+  const filteredGames: GameSummary[] = useMemo(() => {
+    const list = ENV.MOCK_DATA_ENABLED ? mockGames : gameTiles
+
+    if (!list) return []
+    if (selectedFilter === "ALL") return list
+    return list.filter(game => game.state === selectedFilter)
+  }, [gameTiles, selectedFilter])
 
   return (
     <div className="flex flex-col justify-center items-center gap-2 mt-5 sm:mt-10">
