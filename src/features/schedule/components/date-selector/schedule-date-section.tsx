@@ -7,12 +7,16 @@ export function ScheduleDateSection() {
   const { onDateChange, currentDate } = useDateStore()
 
   const handlePreviousDay = () => {
+    if (!currentDate) return
+
     const previousDay = currentDate
     previousDay.setDate(previousDay.getDate() - 1)
     onDateChange(previousDay)
   }
 
   const handleNextDay = () => {
+    if (!currentDate) return
+
     const nextDay = currentDate
     nextDay.setDate(nextDay.getDate() + 1)
     onDateChange(nextDay)

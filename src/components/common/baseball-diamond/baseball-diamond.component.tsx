@@ -9,7 +9,7 @@ export function BaseballDiamond({ runnersOnBase = [], className = "" }: Baseball
   const hasThird = runnersOnBase.includes("3B")
 
   return (
-    <div className={`relative w-12 h-12 ${className}`}>
+    <div className={`relative w-10 h-10 ${className}`}>
       <div
         className={`absolute top-0 left-1/2 transform -translate-x-1/2 w-3 h-3 rotate-45 ${
           hasSecond ? "bg-red-500" : "bg-gray-500"

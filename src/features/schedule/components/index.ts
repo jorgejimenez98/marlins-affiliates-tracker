@@ -1,1 +1,6 @@
+export { FinalTile } from "./final-tile/final-tile"
+export { GamesFilters } from "./filters/games-filters"
+export { InProgressTile } from "./in-progress-tile/in-progress-tile"
+export { NoGameTile } from "./no-game-tile/no-game-tile"
+export { NotStartedTile } from "./not-started-tile/not-started-tile"
 export { ScheduleDateSection } from "./date-selector/schedule-date-section"

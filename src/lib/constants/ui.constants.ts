@@ -1,6 +1,12 @@
 export const UI = {
+  DATE_FORMAT: "yyyy-MM-dd",
+
   IMAGES: {
     LOGO: "/img/logo.svg"
+  },
+
+  TAN_STANK_KEYS: {
+    SCHEDULE: "games-schedule"
   },
 
   LINKS: {
