@@ -55,10 +55,6 @@ Copy the `.env.example` file and rename it to `.env`. Then fill in any required 
 cp .env.example .env
 ```
 
-### Available Environment Variables
-
-- `VITE_MOCK_DATA_ENABLED`: Set to `true` to use mock data when real game data is not available for the selected date. This allows you to see all game states (Scheduled, In Progress, Final) for testing purposes.
-
 ---
 
 ## 🚀 Getting Started
