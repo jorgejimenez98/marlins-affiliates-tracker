@@ -18,21 +18,21 @@ export function InProgressTile({ game }: { game: GameSummary }) {
       <CardContent className="h-full p-2.5 sm:p-3">
         <div className="flex flex-col sm:flex-row justify-between gap-3">
 
-          <div className="space-y-3">
+          <div className="space-y-3 flex-1 min-w-0 overflow-hidden">
+            <Badge variant={"secondary"}>
+              {game.level}
+            </Badge>
+
             <div className="flex items-center gap-2 flex-wrap">
               <h3 className="font-semibold text-sm text-foreground">
                 {game.teamName}
               </h3>
 
-              <Badge variant={"secondary"}>
-                {game.level}
-              </Badge>
-
               <Badge>{homeScore}</Badge>
             </div>
 
             <div className="flex items-center space-x-3 mb-1">
-              <span className="text-sm font-medium text-muted-foreground">
+              <span className="text-sm font-medium text-muted-foreground truncate">
                 vs {game.opponentName}
               </span>
 
@@ -64,7 +64,7 @@ export function InProgressTile({ game }: { game: GameSummary }) {
           </div>
 
           <div className="space-y-3 relative">
-            <div className="flex gap-3 sm:justify-end py-3 sm:py-0">
+            <div className="flex flex-col-reverse sm:flex-row gap-3 sm:justify-end py-3 sm:py-0">
               {game.venue && (
                 <div className="flex items-center gap-1 text-muted-foreground">
                   <MapPin className="h-2.5 w-2.5" />
@@ -81,7 +81,7 @@ export function InProgressTile({ game }: { game: GameSummary }) {
               </Badge>
             </div>
 
-            <div className="flex justify-end items-center gap-3 relative bottom-32 sm:bottom-0 -mb-20">
+            <div className="flex justify-end items-center gap-3 relative bottom-40 sm:bottom-0 -mb-20">
               <BaseballDiamond
                 runnersOnBase={game.runnersOnBase || []}
                 className="w-10 h-10 mt-3"

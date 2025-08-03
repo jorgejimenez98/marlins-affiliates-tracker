@@ -9,20 +9,25 @@ export function NotStartedTile({ game }: { game: GameSummary }) {
     <Card className="w-full border-l-4 border-l-blue-500">
       <CardContent className="p-3 sm:p-4">
 
-        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 sm:gap-0 mb-2">
-          <div className="flex items-center gap-2 flex-wrap">
-            <h3 className="font-semibold text-sm sm:text-base text-foreground">
-              {game.teamName}
-            </h3>
-
-            <Badge variant={"secondary"}>
-              {game.level}
-            </Badge>
-          </div>
+        <div className="flex justify-between items-center relative bottom-4">
+          <Badge variant={"secondary"}>
+            {game.level}
+          </Badge>
 
           <Badge variant={"outline"}>
             {game.gameTime}
           </Badge>
+        </div>
+
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 sm:gap-0 mb-2">
+
+          <div className="flex items-center gap-2 flex-wrap">
+            <h3 className="font-semibold text-sm sm:text-base text-foreground">
+              {game.teamName}
+            </h3>
+          </div>
+
+
         </div>
 
         <div className="text-sm font-medium text-muted-foreground mb-2">
@@ -30,7 +35,7 @@ export function NotStartedTile({ game }: { game: GameSummary }) {
           {game.opponentParentClub && <span className="text-xs ml-1">({game.opponentParentClub})</span>}
         </div>
 
-        <div className="flex items-center justify-between text-xs">
+        <div className="flex items-center justify-between text-xs mb-3">
           {game.probablePitchers && (
             <div className="flex gap-3">
               <span>
@@ -43,16 +48,16 @@ export function NotStartedTile({ game }: { game: GameSummary }) {
               </span>
             </div>
           )}
-
-          {game.venue && (
-            <div className="flex items-center gap-1 text-muted-foreground">
-              <MapPin className="h-2.5 w-2.5" />
-              <span className="truncate">
-                {game.venue}
-              </span>
-            </div>
-          )}
         </div>
+
+        {game.venue && (
+          <div className="flex items-center gap-1 text-muted-foreground">
+            <MapPin className="h-2.5 w-2.5" />
+            <span className="truncate">
+              {game.venue}
+            </span>
+          </div>
+        )}
       </CardContent>
     </Card>
   )

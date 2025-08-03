@@ -31,7 +31,6 @@ export interface TeamInfo {
     id: number
     name: string
     link: string
-    clubName?: string
   }
   score?: number
   splitSquad?: boolean

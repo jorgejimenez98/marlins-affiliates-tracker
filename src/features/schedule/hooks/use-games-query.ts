@@ -61,9 +61,11 @@ export function useGamesQuery() {
         teamName: teams[teamSide].team.name,
         level: summaries[summaryIndex].level,
         opponentName: teams[oppSide].team.name,
-        opponentParentClub: teams[oppSide].team.clubName,
         state: "NO_GAME"
       }
+
+      const { data: teamData } = await api.get(teams[oppSide].team.link)
+      summary.opponentParentClub = teamData?.teams?.[0]?.parentOrgName || ""
 
       switch (status.abstractGameState) {
         case "Preview":
@@ -98,13 +100,9 @@ export function useGamesQuery() {
 
             const runners = liveData?.liveData?.plays?.currentPlay?.runners ?? []
 
-            //console.log({ x: liveData?.liveData?.plays?.currentPlay })
-
             summary.runnersOnBase = runners
               .filter(r => !r.movement?.isOut && typeof r.movement?.end === "string")
               .map(r => r.movement!.end)
-
-            //console.log({ o: summary.runnersOnBase })
 
           } catch {
             summary.score = {

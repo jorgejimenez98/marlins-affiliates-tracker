@@ -17,6 +17,16 @@ export function FinalTile({ game }: { game: GameSummary }) {
   return (
     <Card className={`w-full border-l-4 ${cardBorderClass} h-full`}>
       <CardContent>
+
+        <div className="flex justify-between mb-5">
+          <Badge variant={"secondary"}>
+            {game.level}
+          </Badge>
+
+          <Badge variant={"outline"}>
+            {t("final")}
+          </Badge>
+        </div>
         <div className="flex flex-col sm:flex-row justify-between gap-3">
 
           <div className="space-y-3">
@@ -25,9 +35,6 @@ export function FinalTile({ game }: { game: GameSummary }) {
                 {game.teamName}
               </h3>
 
-              <Badge variant={"secondary"}>
-                {game.level}
-              </Badge>
 
               <Badge>{homeScore}</Badge>
             </div>
@@ -82,10 +89,6 @@ export function FinalTile({ game }: { game: GameSummary }) {
                   </span>
                 </div>
               )}
-
-              <Badge variant={"outline"}>
-                {t("final")}
-              </Badge>
             </div>
           </div>
         </div>

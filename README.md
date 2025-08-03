@@ -17,9 +17,9 @@ Track the upcoming and recent games of the **Miami Marlins** and their **minor l
 
 ## 📸 Previews
 
-| Desktop Example | Mobile Example |
-|-----------------|----------------|
-| ![Desktop View](/public/docs/desktop.png) | ![Mobile View](/public/docs/mobile.png) |
+| Desktop | Mobile | VS MLB Real Time Data |
+|-----------------|----------------| --------------------- |
+| ![Desktop View](/public/docs/desktop.png) | ![Mobile View](/public/docs/mobile.png) | ![Mobile View](/public/docs/vs-mlb-data.jpg) |
 
 ---
 
