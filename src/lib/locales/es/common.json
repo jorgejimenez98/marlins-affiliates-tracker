@@ -8,6 +8,7 @@
   "data-updated": "Datos actualizados exitosamente",
   "final": "Finalizado",
   "footer": "Copyright © {{ currentYear }} - Todos los derechos reservados",
+  "header": "Programador de juegos",
   "live": "En vivo",
   "loading": "Cargando datos",
   "lp": "PP",

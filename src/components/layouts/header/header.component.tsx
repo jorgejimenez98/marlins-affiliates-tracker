@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next"
 import { Link } from "react-router-dom"
 
 import { HeaderLanguagePopover, HeaderRefreshButton, HeaderThemeButton } from "./components"
@@ -8,6 +9,8 @@ import { PAGE_URLS, UI } from "@/lib/constants"
 import { cn } from "@/lib/utils"
 
 export function Header() {
+  const { t } = useTranslation()
+
   const scrolled = useScrolled(10)
 
   return (
@@ -35,7 +38,7 @@ export function Header() {
           </p>
 
           <p className="text-xs text-muted-foreground -mt-1">
-            Game Scheduler
+            {t("header")}
           </p>
         </div>
       </div>

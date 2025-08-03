@@ -8,6 +8,7 @@
   "data-updated": "Data updated successfully",
   "final": "Final",
   "footer": "Copyright © {{ currentYear }} - All rights reserved ",
+  "header": "Game Scheduler",
   "live": "Live",
   "loading": "Loading data",
   "lp": "LP",
