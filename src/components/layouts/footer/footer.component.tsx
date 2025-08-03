@@ -1,7 +1,11 @@
+import { useTranslation } from "react-i18next"
+
 import { UI } from "@/lib/constants"
 import { cn } from "@/lib/utils"
 
 export function Footer() {
+  const { t } = useTranslation()
+
   const currentYear = new Date().getFullYear()
 
   return (
@@ -10,18 +14,19 @@ export function Footer() {
       aria-label="Site footer"
     >
       <p className="text-sm">
-        &copy; {currentYear} All rights reserved
+        {t("footer", { currentYear })}
       </p>
 
       <p className="text-sm flex justify-center items-center gap-2">
-        Made by
+        {t("made")}
+
         <a
           href={UI.LINKS.LINKEDIN}
           target="_blank"
           rel="noopener noreferrer"
           className="font-medium text-marlins-gradient hover-default"
         >
-          Jorge Jimenez
+          {UI.PROGRAMMER}
         </a>
       </p>
     </footer>

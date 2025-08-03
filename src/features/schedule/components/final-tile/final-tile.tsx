@@ -1,10 +1,13 @@
 import { MapPin } from "lucide-react"
+import { useTranslation } from "react-i18next"
 
 import type { GameSummary } from "../../types"
 
 import { Badge, Card, CardContent } from "@/components/ui"
 
 export function FinalTile({ game }: { game: GameSummary }) {
+  const { t } = useTranslation()
+
   const isWin = game.score && game.score.home > game.score.away
   const awayScore = game.score?.away ?? 0
   const homeScore = game.score?.home ?? 0
@@ -16,7 +19,6 @@ export function FinalTile({ game }: { game: GameSummary }) {
       <CardContent>
         <div className="flex flex-col sm:flex-row justify-between gap-3">
 
-          {/* Información del equipo y resultado */}
           <div className="space-y-3">
             <div className="flex items-center gap-2 flex-wrap">
               <h3 className="font-semibold text-sm text-foreground">
@@ -47,22 +49,22 @@ export function FinalTile({ game }: { game: GameSummary }) {
             {game.pitchersOfRecord && (
               <div className="flex flex-col sm:flex-row sm:items-center sm:gap-5 dark:text-slate-400 mt-5 text-sm">
                 {game.pitchersOfRecord.win && (
-                  <span>
-                    <span className="text-muted-foreground">WP:</span>{" "}
+                  <div className="space-x-1">
+                    <span className="text-muted-foreground">{t("wp")}:</span>
                     <strong>{game.pitchersOfRecord.win}</strong>
-                  </span>
+                  </div>
                 )}
 
                 {game.pitchersOfRecord.loss && (
-                  <span>
-                    <span className="text-muted-foreground">LP:</span>{" "}
+                  <div className="space-x-1">
+                    <span className="text-muted-foreground">{t("lp")}:</span>
                     <strong>{game.pitchersOfRecord.loss}</strong>
-                  </span>
+                  </div>
                 )}
 
                 {game.pitchersOfRecord.save && (
-                  <span>
-                    <span className="text-muted-foreground">SV:</span>{" "}
+                  <span className="space-x-1">
+                    <span className="text-muted-foreground">SV:</span>
                     <strong>{game.pitchersOfRecord.save}</strong>
                   </span>
                 )}
@@ -75,11 +77,15 @@ export function FinalTile({ game }: { game: GameSummary }) {
               {game.venue && (
                 <div className="flex items-center gap-1 text-muted-foreground">
                   <MapPin className="h-2.5 w-2.5" />
-                  <span className="truncate">{game.venue.split(",")[0]}</span>
+                  <span className="truncate">
+                    {game.venue}
+                  </span>
                 </div>
               )}
 
-              <Badge variant={"outline"}>Final</Badge>
+              <Badge variant={"outline"}>
+                {t("final")}
+              </Badge>
             </div>
           </div>
         </div>

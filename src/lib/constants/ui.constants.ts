@@ -1,6 +1,8 @@
 export const UI = {
   DATE_FORMAT: "yyyy-MM-dd",
 
+  PROGRAMMER: "George Jimenez",
+
   IMAGES: {
     LOGO: "/img/logo.svg"
   },

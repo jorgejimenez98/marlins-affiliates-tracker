@@ -7,18 +7,22 @@ import type { GameSummary, LiveFeedResponse, ScheduleAPIResponse } from "../type
 
 import { useTeamsInfoQuery } from "./use-teams-info"
 
+import { useDateLocale } from "@/hooks"
 import { ENDPOINTS, UI } from "@/lib/constants"
 import { api } from "@/lib/utils"
 import { useDateStore } from "@/stores"
 
 export function useGamesQuery() {
+  const locale = useDateLocale()
+
   const { currentDate } = useDateStore()
-  const dateFormatted = currentDate ? format(currentDate, UI.DATE_FORMAT) : null
+  const dateFormatted = currentDate ? format(currentDate, UI.DATE_FORMAT, { locale }) : null
 
   const { data: teamsRes = [] } = useTeamsInfoQuery()
 
   const queryFn = async (): Promise<GameSummary[]> => {
     const params = new URLSearchParams()
+
     TEAM_IDS.forEach(id => params.append("teamId", id.toString()))
     SPORT_IDS.forEach(id => params.append("sportId", id.toString()))
     HYDRATION_FIELDS.forEach(field => params.append("hydrate", field))
@@ -42,6 +46,7 @@ export function useGamesQuery() {
 
       const isHome = TEAM_IDS.includes(teams.home.team.id)
       const isAway = TEAM_IDS.includes(teams.away.team.id)
+
       if (!isHome && !isAway) continue
 
       const teamSide = isHome ? "home" : "away"
@@ -64,7 +69,7 @@ export function useGamesQuery() {
         case "Preview":
           summary.state = "NOT_STARTED"
           summary.venue = venue?.name
-          summary.gameTime = format(gameDate, "hh:mm a")
+          summary.gameTime = format(gameDate, "hh:mm a", { locale })
           if (probablePitchers) {
             summary.probablePitchers = {
               home: probablePitchers?.home?.fullName,

@@ -9,6 +9,7 @@ import { api } from "@/lib/utils"
 export function useTeamsInfoQuery() {
   return useQuery<SmallTeamInfo[]>({
     queryKey: [UI.TAN_STANK_KEYS.TEAMS],
+
     queryFn: async () => {
       const results = await Promise.all(
         TEAM_IDS.map(async id => {

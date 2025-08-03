@@ -1,8 +1,11 @@
+import { useTranslation } from "react-i18next"
+
 import type { GameSummary } from "../../types"
 
 import { Badge, Card, CardContent } from "@/components/ui"
 
 export function NoGameTile({ game }: { game: GameSummary }) {
+  const { t } = useTranslation()
 
   return (
     <Card className="border-l-4 border-l-gray-400 dark:border-l-gray-500">
@@ -20,8 +23,8 @@ export function NoGameTile({ game }: { game: GameSummary }) {
           </div>
         </div>
 
-        <Badge variant={"outline"}>
-          NO GAME
+        <Badge variant={"outline"} className="uppercase">
+          {t("no-game")}
         </Badge>
       </CardContent>
     </Card>

@@ -1,0 +1,22 @@
+{
+  "404-cta": "Go Back to the Homepage",
+  "404-description": " Sorry, the page you're looking for doesn't exist or has been moved.",
+  "404-title": "Page Not Found",
+  "all-teams": "All Teams",
+  "at-bat": "At Bat",
+  "clear": "Clear",
+  "data-updated": "Data updated successfully",
+  "final": "Final",
+  "footer": "Copyright © {{ currentYear }} - All rights reserved ",
+  "live": "Live",
+  "loading": "Loading data",
+  "lp": "LP",
+  "made": "Made by",
+  "no-game": "No Game",
+  "pick-date": "Pick a date",
+  "pitching": "Pitching",
+  "scheduled": "Scheduled",
+  "title": "Schedule and Results",
+  "today": "Today",
+  "wp": "WP"
+}

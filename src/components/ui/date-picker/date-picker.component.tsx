@@ -1,6 +1,7 @@
 "use client"
 import { format as formatDate } from "date-fns"
 import { CalendarIcon, X } from "lucide-react"
+import { useTranslation } from "react-i18next"
 
 import { cn } from "../../../lib/utils"
 import { Button } from "../button/button.component"
@@ -10,15 +11,20 @@ import { CalendarView, MonthView, YearView } from "./components"
 import type { DatePickerProps } from "./date-picker.properties"
 import { useDatePicker } from "./hooks/use-date-picker"
 
+import { useDateLocale } from "@/hooks"
+
 export function DatePicker({
   value,
   onChange,
-  placeholder = "Pick a date",
+  placeholder,
   format = "PPP",
   disabled,
   className,
-  clearEnabled = true
+  clearEnabled = true,
+  yearViewEnabled = true
 }: DatePickerProps) {
+  const { t } = useTranslation()
+  const locale = useDateLocale()
 
   const {
     // States
@@ -41,7 +47,7 @@ export function DatePicker({
     handlePrevYear,
     handleYearClick,
     handleYearSelect
-  } = useDatePicker({ value, onChange })
+  } = useDatePicker({ value, yearViewEnabled, onChange })
 
   // Render the appropriate view
   const renderContent = () => {
@@ -51,6 +57,7 @@ export function DatePicker({
           <MonthView
             currentMonth={currentMonth}
             currentYear={currentYear}
+            yearViewEnabled={yearViewEnabled}
             onMonthSelect={handleMonthSelect}
             onYearClick={handleYearClick}
             onPrevYear={handlePrevYear}
@@ -73,6 +80,7 @@ export function DatePicker({
             currentDate={currentDate}
             selectedDate={selectedDate}
             clearEnabled={clearEnabled}
+            yearViewEnabled={yearViewEnabled}
             onDateSelect={handleDateSelect}
             onMonthClick={handleMonthClick}
             onYearClick={handleYearClick}
@@ -96,7 +104,7 @@ export function DatePicker({
           )}
         >
           <CalendarIcon className="size-4" />
-          {selectedDate ? formatDate(selectedDate, format) : <span>{placeholder}</span>}
+          {selectedDate ? formatDate(selectedDate, format, { locale }) : <span>{placeholder || t("pick-date")}</span>}
 
           {selectedDate && clearEnabled && (
             <Button

@@ -1,5 +1,7 @@
 import { useMemo } from "react"
 
+import { useTranslation } from "react-i18next"
+
 import { FinalTile, InProgressTile, GamesFilters, NoGameTile, NotStartedTile, ScheduleDateSection } from "./components"
 import { useDateListener, useGamesQuery } from "./hooks"
 import type { GameSummary } from "./types"
@@ -10,6 +12,8 @@ import { mockGames } from "@/lib/constants/mock-data.constants"
 import { useDateStore } from "@/stores"
 
 export default function SchedulePage() {
+  const { t } = useTranslation()
+
   // Date Check on value changes
   useDateListener()
 
@@ -32,7 +36,7 @@ export default function SchedulePage() {
 
         {/* Title */}
         <h1 className="text-4xl md:text-5xl font-bold text-marlins-gradient mt-2">
-          Schedule and Results
+          {t("title")}
         </h1>
 
         {/* Date Selector */}
@@ -42,7 +46,7 @@ export default function SchedulePage() {
       {/* Loader */}
       {isLoading || isFetching ? (
         <Loader
-          text="Loading data"
+          text={t("loading")}
           className="py-24"
         />
       ) : filteredGames && (

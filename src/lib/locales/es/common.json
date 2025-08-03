@@ -1,0 +1,22 @@
+{
+  "404-cta": "Volver a la página principal",
+  "404-description": "Lo sentimos, la página que buscas no existe o ha sido movida.",
+  "404-title": "Página no encontrada",
+  "all-teams": "Todos los equipos",
+  "at-bat": "Al bate",
+  "clear": "Limpiar",
+  "data-updated": "Datos actualizados exitosamente",
+  "final": "Finalizado",
+  "footer": "Copyright © {{ currentYear }} - Todos los derechos reservados",
+  "live": "En vivo",
+  "loading": "Cargando datos",
+  "lp": "PP",
+  "made": "Hecho por",
+  "no-game": "Sin partido",
+  "pick-date": "Selecciona una fecha",
+  "pitching": "Lanzando",
+  "scheduled": "Programado",
+  "title": "Calendario y Resultados",
+  "today": "Hoy",
+  "wp": "PG"
+}

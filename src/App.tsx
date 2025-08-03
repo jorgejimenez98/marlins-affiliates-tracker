@@ -1,5 +1,7 @@
 import { Suspense } from "react"
 
+import "@/lib/utils/i18n"
+
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
 import { BrowserRouter, Routes } from "react-router-dom"
 import { Toaster as SonnerToastWrapper } from "sonner"

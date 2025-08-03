@@ -36,6 +36,7 @@ export function ScheduleDateSection() {
         value={currentDate}
         onChange={date => date && onDateChange(date)}
         clearEnabled={false}
+        yearViewEnabled={false}
       />
 
       <Button

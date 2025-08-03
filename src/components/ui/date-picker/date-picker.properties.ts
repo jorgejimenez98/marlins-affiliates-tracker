@@ -22,6 +22,7 @@ export interface DatePickerProps {
   disabled?: boolean
   className?: string
   clearEnabled?: boolean
+  yearViewEnabled?: boolean
 }
 
 // Hook return type
@@ -54,6 +55,7 @@ export interface CalendarViewProps {
   currentDate: Date
   selectedDate: Date | null
   clearEnabled?: boolean
+  yearViewEnabled?: boolean
   onDateSelect: (date: Date | null) => void
   onMonthClick: () => void
   onYearClick: () => void
@@ -65,6 +67,7 @@ export interface CalendarViewProps {
 export interface MonthViewProps {
   currentMonth: number
   currentYear: number
+  yearViewEnabled?: boolean
   onMonthSelect: (month: number) => void
   onYearClick: () => void
   onPrevYear: () => void

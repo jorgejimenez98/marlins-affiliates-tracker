@@ -3,6 +3,7 @@ import { useState } from "react"
 import { useQueryClient } from "@tanstack/react-query"
 import { formatDate } from "date-fns"
 import { RefreshCw } from "lucide-react"
+import { useTranslation } from "react-i18next"
 import { toast } from "sonner"
 
 import { Button } from "@/components/ui"
@@ -11,6 +12,8 @@ import { sleep } from "@/lib/utils"
 import { useDateStore } from "@/stores"
 
 export function HeaderRefreshButton() {
+  const { t } = useTranslation()
+
   const [isRefreshing, setIsRefreshing] = useState(false)
 
   const queryClient = useQueryClient()
@@ -24,7 +27,7 @@ export function HeaderRefreshButton() {
     await sleep(0.5)
     await queryClient.invalidateQueries({ queryKey: [UI.TAN_STANK_KEYS.SCHEDULE] })
 
-    toast.success("Data updated sucessfully")
+    toast.success(t("data-updated"))
 
     setIsRefreshing(false)
   }

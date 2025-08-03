@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom"
 
-import { HeaderRefreshButton, HeaderThemeButton } from "./components"
+import { HeaderLanguagePopover, HeaderRefreshButton, HeaderThemeButton } from "./components"
 
 import { Image } from "@/components/ui"
 import { useScrolled } from "@/hooks"
@@ -42,6 +42,9 @@ export function Header() {
 
       {/* Actions */}
       <div className="w-fit px-4 flex gap-2 p-2 rounded-full border">
+        {/* Language */}
+        <HeaderLanguagePopover />
+
         {/* Refresh */}
         <HeaderRefreshButton />
 

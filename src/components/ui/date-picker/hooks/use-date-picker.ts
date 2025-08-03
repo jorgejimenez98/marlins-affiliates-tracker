@@ -11,10 +11,11 @@ import type { DatePickerHookReturn, DateView } from "../date-picker.properties"
 
 interface UseDatePickerProps {
   value: Date | null
+  yearViewEnabled: boolean
   onChange: (date: Date | null) => void
 }
 
-export function useDatePicker({ value, onChange }: UseDatePickerProps): DatePickerHookReturn {
+export function useDatePicker({ value, yearViewEnabled, onChange }: UseDatePickerProps): DatePickerHookReturn {
   const [date, setDate] = useState<Date | null>(value || null)
   const [view, setView] = useState<DateView>("calendar")
 
@@ -38,7 +39,9 @@ export function useDatePicker({ value, onChange }: UseDatePickerProps): DatePick
 
   // View handlers
   const handleMonthClick = () => setView("month")
-  const handleYearClick = () => setView("year")
+  const handleYearClick = () => {
+    if (yearViewEnabled) setView("year")
+  }
 
   // Selection handlers
   const handleMonthSelect = (monthIndex: number) => {

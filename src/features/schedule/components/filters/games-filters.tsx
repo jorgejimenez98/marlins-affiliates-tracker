@@ -1,4 +1,5 @@
 import { Circle } from "lucide-react"
+import { useTranslation } from "react-i18next"
 
 import type { GameStateFilter, GameSummary } from "../../types"
 
@@ -11,14 +12,16 @@ interface GameFilterProps {
 }
 
 export function GamesFilters({ selectedFilter, games }: GameFilterProps) {
+  const { t } = useTranslation()
+
   const { onGameFilterChange } = useDateStore()
 
   const filters: { key: GameStateFilter; label: string; icon?: React.ReactNode }[] = [
-    { key: "ALL", label: "All Teams" },
-    { key: "NO_GAME", label: "No Game" },
-    { key: "NOT_STARTED", label: "Scheduled" },
-    { key: "IN_PROGRESS", label: "Live", icon: <Circle className="h-3 w-3 fill-current" /> },
-    { key: "FINAL", label: "Final" }
+    { key: "ALL", label: t("all-teams") },
+    { key: "NO_GAME", label: t("no-game") },
+    { key: "NOT_STARTED", label: t("scheduled") },
+    { key: "IN_PROGRESS", label: t("live"), icon: <Circle className="h-3 w-3 fill-current" /> },
+    { key: "FINAL", label: t("final") }
   ]
 
   const gameCounts = {

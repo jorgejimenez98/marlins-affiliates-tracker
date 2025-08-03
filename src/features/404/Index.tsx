@@ -1,10 +1,12 @@
 import { Home } from "lucide-react"
+import { useTranslation } from "react-i18next"
 import { Link } from "react-router-dom"
 
 import { Button } from "@/components/ui"
 import { PAGE_URLS } from "@/lib/constants"
 
 export default function NotFound() {
+  const { t } = useTranslation()
 
   return (
     <div className="flex flex-col items-center justify-center min-h-[calc(100vh-200px)] px-4 py-12 sm:px-6 lg:px-8">
@@ -16,11 +18,11 @@ export default function NotFound() {
           </h1>
 
           <h2 className="text-2xl sm:text-3xl font-bold">
-            Page Not Found
+            {t("404-title")}
           </h2>
 
           <p className="text-xl">
-            Sorry, the page you're looking for doesn't exist or has been moved.
+            {t("404-description")}
           </p>
         </div>
 
@@ -28,7 +30,7 @@ export default function NotFound() {
           <Link to={PAGE_URLS.SCHEDULE}>
             <Button className="w-full flex items-center justify-center">
               <Home className="mr-2 h-4 w-4" />
-              Go Back to the Homepage
+              {t("404-cta")}
             </Button>
           </Link>
         </div>

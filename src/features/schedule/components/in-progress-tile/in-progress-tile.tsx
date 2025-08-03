@@ -1,4 +1,5 @@
 import { Circle, MapPin } from "lucide-react"
+import { useTranslation } from "react-i18next"
 
 import type { GameSummary } from "../../types"
 
@@ -6,6 +7,8 @@ import { BaseballDiamond } from "@/components/common"
 import { Badge, Card, CardContent } from "@/components/ui"
 
 export function InProgressTile({ game }: { game: GameSummary }) {
+  const { t } = useTranslation()
+
   const awayScore = game.score?.away || 0
   const homeScore = game.score?.home || 0
 
@@ -44,11 +47,17 @@ export function InProgressTile({ game }: { game: GameSummary }) {
 
             <div className="flex flex-col sm:flex-row sm:items-center sm:gap-5 dark:text-slate-400 mt-5">
               {game.atBat && (
-                <p>At Bat: <br className="hidden sm:block" /> <strong>{game.atBat}</strong></p>
+                <p>
+                  {t("at-bat")}: <br className="hidden sm:block" />
+                  <strong>{game.atBat}</strong>
+                </p>
               )}
 
               {game.pitcher && (
-                <span>Pitching: <br className="hidden sm:block" /><strong>{game.pitcher}</strong></span>
+                <span>
+                  {t("pitching")}: <br className="hidden sm:block" />
+                  <strong>{game.pitcher}</strong>
+                </span>
               )}
             </div>
 
@@ -59,13 +68,16 @@ export function InProgressTile({ game }: { game: GameSummary }) {
               {game.venue && (
                 <div className="flex items-center gap-1 text-muted-foreground">
                   <MapPin className="h-2.5 w-2.5" />
-                  <span className="truncate">{game.venue.split(",")[0]}</span>
+
+                  <span className="truncate">
+                    {game.venue}
+                  </span>
                 </div>
               )}
 
-              <Badge variant={"outline"} className="gap-2">
+              <Badge variant={"outline"} className="gap-2 uppercase">
                 <Circle className="size-1 fill-current animate-pulse" />
-                LIVE
+                {t("live")}
               </Badge>
             </div>
 
