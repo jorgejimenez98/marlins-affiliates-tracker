@@ -1,8 +1,8 @@
 import { Suspense } from "react"
 
 import "@/lib/utils/i18n"
-
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
+import { Analytics } from "@vercel/analytics/react"
 import { BrowserRouter, Routes } from "react-router-dom"
 import { Toaster as SonnerToastWrapper } from "sonner"
 
@@ -43,6 +43,7 @@ export function App() {
                 position="bottom-center"
                 duration={1000}
               />
+              <Analytics />
             </div>
           </Suspense>
         </ThemeProvider>
