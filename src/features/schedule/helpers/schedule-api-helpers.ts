@@ -1,0 +1,160 @@
+/* eslint-disable complexity */
+import { format, type Locale } from "date-fns"
+
+import { HYDRATION_PARAMS, SPORT_IDS, TEAM_IDS } from "../constants"
+import type { Decision, Game, GameSummary, LiveFeedResponse, SmallTeamInfo, TeamsParam, Venue } from "../types"
+
+
+import { ENDPOINTS } from "@/lib/constants"
+import { api } from "@/lib/utils"
+
+class ScheduleApiHelper {
+
+  // Constructs the API URL to fetch schedule data for given date
+  getScheduleApiUrl(dateFormatted: string | null) {
+    const params = new URLSearchParams()
+
+    TEAM_IDS.forEach(id => params.append("teamId", id.toString()))
+    SPORT_IDS.forEach(id => params.append("sportId", id.toString()))
+
+    if (dateFormatted) params.append("date", dateFormatted)
+
+    const url = `${ENDPOINTS.SCHEDULE}?${params.toString()}&${HYDRATION_PARAMS}`
+
+    return url
+  }
+
+  // Initializes empty game summaries for all teams
+  initializeSummaries(teams: SmallTeamInfo[]): GameSummary[] {
+    return teams.map(team => ({
+      teamId: team.id,
+      teamName: team.name,
+      level: team.level,
+      state: "NO_GAME"
+    }))
+  }
+
+  // Fills a specific team's summary based on game data and game state
+  async fillGameSummary(game: Game, summaries: GameSummary[], locale: Locale) {
+    const { teams, status, decisions } = game
+
+    const isHome = TEAM_IDS.includes(teams.home.team.id)
+    const isAway = TEAM_IDS.includes(teams.away.team.id)
+    if (!isHome && !isAway) return
+
+    const teamSide = isHome ? "home" : "away"
+    const oppSide = isHome ? "away" : "home"
+    const teamId = teams[teamSide].team.id
+
+    const summaryIndex = summaries.findIndex(s => s.teamId === teamId)
+    if (summaryIndex === -1) return
+
+    const summary: GameSummary = {
+      teamId,
+      teamName: teams[teamSide].team.name,
+      level: summaries[summaryIndex].level,
+      opponentName: teams[oppSide].team.name,
+      opponentParentClub: teams[oppSide].team.parentOrgName,
+      state: "NO_GAME"
+    }
+
+    switch (status.abstractGameState) {
+      case "Preview": {
+        // Populate game summary for a not-yet-started game
+        this.fillPreviewGame(summary, game, locale)
+        break
+      }
+      case "Live": {
+        // Populate game summary for a live/in-progress game
+        this.fillLiveGame(summary, game, teams)
+        break
+      }
+      case "Final": {
+        // Populate game summary for a completed game
+        this.fillFinalGame(summary, teams, decisions!)
+        break
+      }
+    }
+
+    summaries[summaryIndex] = summary
+  }
+
+  /* --------------------------------------------------- Helpers  ---------------- s*/
+
+  // Formats and returns the venue string (name + location)
+  getVenue(venue: Venue): string {
+    return [
+      venue?.name,
+      venue?.location?.city,
+      venue?.location?.stateAbbrev
+    ].filter(Boolean).join(", ")
+  }
+
+  // Fills preview (not started) game data into summary
+  fillPreviewGame(summary: GameSummary, game: Game, locale: Locale) {
+    summary.state = "NOT_STARTED"
+    summary.venue = this.getVenue(game.venue)
+
+    summary.gameTime = format(game.gameDate, "hh:mm a", { locale })
+
+    const homePitcher = game.teams.home.probablePitcher?.fullName
+    const awayPitcher = game.teams.away.probablePitcher?.fullName
+
+    if (homePitcher || awayPitcher) {
+      summary.probablePitchers = {
+        home: homePitcher,
+        away: awayPitcher
+      }
+    }
+  }
+
+  // Fills live game data, including current inning, outs, and runners on base
+  fillFinalGame(summary: GameSummary, teams: TeamsParam, decisions: Decision) {
+    summary.state = "FINAL"
+
+    summary.score = {
+      home: teams.home.score ?? 0,
+      away: teams.away.score ?? 0
+    }
+    summary.pitchersOfRecord = {
+      win: decisions?.winner?.fullName,
+      loss: decisions?.loser?.fullName,
+      save: decisions?.save?.fullName
+    }
+  }
+
+  async fillLiveGame(summary: GameSummary, game: Game, teams: TeamsParam) {
+    summary.state = "IN_PROGRESS"
+    summary.venue = this.getVenue(game.venue)
+
+    try {
+      const { data: liveData }: { data: LiveFeedResponse } = await api.get(`${game.link}?hydrate=plays,runners`)
+      const ls = liveData?.liveData?.linescore
+
+      summary.currentInning = ls?.currentInningOrdinal
+      summary.outs = ls?.outs
+      summary.score = {
+        home: ls?.teams?.home?.runs ?? 0,
+        away: ls?.teams?.away?.runs ?? 0
+      }
+
+      summary.atBat = ls?.offense?.batter?.fullName
+      summary.pitcher = ls?.offense?.pitcher?.fullName
+
+      const runners = liveData?.liveData?.plays?.currentPlay?.runners ?? []
+      summary.runnersOnBase = runners
+        .filter(r => !r.movement?.isOut && typeof r.movement?.end === "string")
+        .map(r => r.movement!.end)
+
+    } catch {
+      summary.score = {
+        home: teams.home.score ?? 0,
+        away: teams.away.score ?? 0
+      }
+      summary.runnersOnBase = []
+    }
+  }
+}
+
+const helpers = new ScheduleApiHelper()
+export { helpers }

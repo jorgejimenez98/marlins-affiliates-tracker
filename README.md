@@ -91,7 +91,7 @@ This application can be installed as a Progressive Web App (PWA) for a native ap
    - Tap the menu (three dots)
    - Select "Add to Home Screen"
 
-Once installed, you can access the app directly from your home screen and use it offline.
+Once installed, you can access the app directly from your home screen
 
 ---
 

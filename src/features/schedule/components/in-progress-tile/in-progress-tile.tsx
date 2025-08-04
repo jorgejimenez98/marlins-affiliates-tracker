@@ -32,7 +32,7 @@ export function InProgressTile({ game }: { game: GameSummary }) {
             </div>
 
             <div className="flex items-center space-x-3 mb-1">
-              <span className="text-sm font-medium text-muted-foreground truncate">
+              <span className="text-sm font-medium text-muted-foreground">
                 vs {game.opponentName}
               </span>
 
@@ -65,23 +65,13 @@ export function InProgressTile({ game }: { game: GameSummary }) {
 
           <div className="space-y-3 relative">
             <div className="flex flex-col-reverse sm:flex-row gap-3 sm:justify-end py-3 sm:py-0">
-              {game.venue && (
-                <div className="flex items-center gap-1 text-muted-foreground">
-                  <MapPin className="h-2.5 w-2.5" />
-
-                  <span className="truncate">
-                    {game.venue}
-                  </span>
-                </div>
-              )}
-
               <Badge variant={"outline"} className="gap-2 uppercase">
                 <Circle className="size-1 fill-current animate-pulse" />
                 {t("live")}
               </Badge>
             </div>
 
-            <div className="flex justify-end items-center gap-3 relative bottom-40 sm:bottom-0 -mb-20">
+            <div className="flex justify-end items-center gap-3 relative bottom-32 sm:bottom-0 -mb-20">
               <BaseballDiamond
                 runnersOnBase={game.runnersOnBase || []}
                 className="w-10 h-10 mt-3"
@@ -91,6 +81,16 @@ export function InProgressTile({ game }: { game: GameSummary }) {
             </div>
           </div>
         </div>
+
+        {game.venue && (
+          <div className="flex items-center justify-center sm:justify-start gap-1 text-muted-foreground mt-5">
+            <MapPin className="h-2.5 w-2.5" />
+
+            <span>
+              {game.venue}
+            </span>
+          </div>
+        )}
       </CardContent>
     </Card>
   )

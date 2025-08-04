@@ -31,11 +31,33 @@ export interface TeamInfo {
     id: number
     name: string
     link: string
+    parentOrgName?: string
+  }
+  probablePitcher?: {
+    fullName: string
   }
   score?: number
   splitSquad?: boolean
   seriesNumber?: number
 }
+
+export interface Venue {
+  id: number
+  name: string
+  link: string
+  location?: {
+    city?: string
+    stateAbbrev?: string
+  }
+}
+
+export interface Decision {
+  winner?: { fullName: string }
+  loser?: { fullName: string }
+  save?: { fullName: string }
+}
+
+export interface TeamsParam { home: TeamInfo; away: TeamInfo }
 
 export interface Game {
   gamePk: number
@@ -49,11 +71,7 @@ export interface Game {
     home: TeamInfo
     away: TeamInfo
   }
-  venue: {
-    id: number
-    name: string
-    link: string
-  }
+  venue: Venue
   linescore?: {
     currentInning?: number
     inningHalf?: string
@@ -63,15 +81,7 @@ export interface Game {
       pitcher?: { fullName: string }
     }
   }
-  probablePitchers?: {
-    home?: { fullName: string }
-    away?: { fullName: string }
-  }
-  decisions?: {
-    winner?: { fullName: string }
-    loser?: { fullName: string }
-    save?: { fullName: string }
-  }
+  decisions?: Decision
 }
 
 export interface ScheduleAPIResponse {

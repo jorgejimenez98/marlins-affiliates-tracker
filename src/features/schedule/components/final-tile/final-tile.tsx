@@ -84,7 +84,7 @@ export function FinalTile({ game }: { game: GameSummary }) {
               {game.venue && (
                 <div className="flex items-center gap-1 text-muted-foreground">
                   <MapPin className="h-2.5 w-2.5" />
-                  <span className="truncate">
+                  <span>
                     {game.venue}
                   </span>
                 </div>
