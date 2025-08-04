@@ -11,6 +11,7 @@ export interface GameSummary {
   state: GameState
   venue?: string
   gameTime?: string
+  inningHalf?: string
   currentInning?: string
   outs?: number
   score?: { home: number; away: number }

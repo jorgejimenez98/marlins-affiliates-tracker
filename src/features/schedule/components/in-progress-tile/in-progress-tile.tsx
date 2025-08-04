@@ -77,6 +77,7 @@ export function InProgressTile({ game }: { game: GameSummary }) {
                 className="w-10 h-10 mt-3"
                 outs={game.outs?.toString()}
                 inning={game.currentInning}
+                inningHalf={game.inningHalf}
               />
             </div>
           </div>

@@ -132,6 +132,7 @@ class ScheduleApiHelper {
       const ls = liveData?.liveData?.linescore
 
       summary.currentInning = ls?.currentInningOrdinal
+      summary.inningHalf = ls?.inningHalf
       summary.outs = ls?.outs
       summary.score = {
         home: ls?.teams?.home?.runs ?? 0,

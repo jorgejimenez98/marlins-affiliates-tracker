@@ -5,6 +5,7 @@ import { cn } from "@/lib/utils"
 export function BaseballDiamond({
   runnersOnBase = [],
   inning,
+  inningHalf,
   outs,
   className
 }: BaseballDiamondProps) {
@@ -34,12 +35,8 @@ export function BaseballDiamond({
       />
 
       <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 translate-y-1/2 flex flex-col items-center">
-        <div className="text-[10px] text-foreground font-semibold -mt-1">
-          {inning ?? "-"}
-        </div>
-
         {outs && (
-          <div className={cn("flex gap-0.5 mt-0.5", +outs === 3 && "animate-pulse")}>
+          <div className={cn("flex gap-0.5 mt-2", +outs === 3 && "animate-pulse")}>
             {[0, 1, 2].map(item => (
               <div
                 key={item}
@@ -50,6 +47,15 @@ export function BaseballDiamond({
             ))}
           </div>
         )}
+
+        <div className="flex gap-1 text-[10px] text-foreground font-semibold mt-2">
+          <span>
+            {inningHalf ?? ""}
+          </span>
+          <span>
+            {inning ?? "-"}
+          </span>
+        </div>
       </div>
     </div>
   )
