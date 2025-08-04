@@ -1,9 +1,10 @@
-export { Toggle } from "./toogle/toogle.component"
 export { Badge } from "./badge/badge.component"
 export { Button } from "./button/button.component"
 export { DatePicker } from "./date-picker/date-picker.component"
 export { Image } from "./image/image.component"
 export { Loader } from "./loader/loader.component"
+export { Skeleton } from "./skeleton/skeleton.component"
+export { Toggle } from "./toogle/toogle.component"
 
 export * from "./popover/popover.component"
 export * from "./card/card.component"

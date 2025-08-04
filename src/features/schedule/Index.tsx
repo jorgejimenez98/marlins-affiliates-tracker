@@ -8,7 +8,7 @@ import { FinalTile, InProgressTile, GamesFilters, NoGameTile, NotStartedTile, Sc
 import { useDateListener, useGamesQuery } from "./hooks"
 import type { GameSummary } from "./types"
 
-import { Loader, ToggleGroup, ToggleGroupItem } from "@/components/ui"
+import { Skeleton, ToggleGroup, ToggleGroupItem } from "@/components/ui"
 import { ENV } from "@/lib/constants"
 import { mockGames } from "@/lib/constants/mock-data.constants"
 import { useDateStore } from "@/stores"
@@ -48,11 +48,11 @@ export default function SchedulePage() {
 
       {/* Loader */}
       {isLoading || isFetching ? (
-        <Loader
-          text={t("loading")}
-          className="py-24"
+        <Skeleton
+          cols={selectedView}
+          className="py-6"
         />
-      ) : filteredGames && (
+      ): filteredGames && (
         <div className="flex flex-col gap-4 py-6 w-full px-3 sm:px-0">
 
           <div className="flex flex-col sm:flex-row justify-between items-center w-full gap-4">

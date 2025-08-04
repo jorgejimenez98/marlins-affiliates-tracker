@@ -40,11 +40,11 @@ export function NotStartedTile({ game }: { game: GameSummary }) {
             <div className="flex gap-3">
               <span>
                 <span className="text-muted-foreground">SP:</span>
-                <span className="ml-1 font-medium">{game.probablePitchers.home}</span>
+                <span className="ml-1 font-medium">{game.probablePitchers.home || "-"}</span>
               </span>
               <span>
                 <span className="text-muted-foreground">SP:</span>
-                <span className="ml-1 font-medium">{game.probablePitchers.away}</span>
+                <span className="ml-1 font-medium">{game.probablePitchers.away || "-"}</span>
               </span>
             </div>
           )}
