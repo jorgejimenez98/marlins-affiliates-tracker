@@ -71,7 +71,7 @@ export function InProgressTile({ game }: { game: GameSummary }) {
               </Badge>
             </div>
 
-            <div className="flex justify-end items-center gap-3 relative bottom-32 sm:bottom-0 -mb-20">
+            <div className="flex justify-end items-center gap-3 relative bottom-32 sm:bottom-0 -mb-20 right-3 sm:right-5">
               <BaseballDiamond
                 runnersOnBase={game.runnersOnBase || []}
                 className="w-10 h-10 mt-3"
