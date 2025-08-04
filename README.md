@@ -40,29 +40,39 @@ Before you begin, ensure you have the following installed:
 
 ---
 
-## ⚙️ Environment Variables
-
-Copy the `.env.example` file and rename it to `.env`. Then fill in any required values:
-
-```bash
-cp .env.example .env
-```
-
----
-
 ## 🚀 Getting Started
 
-1. **Install dependencies**
+1. **Open a terminal in your computer**
+
+2. **Clone the repository**
+   ```bash
+   git clone https://github.com/jorgejimenez98/marlins-affiliates-tracker.git
+   ```
+
+3. **Navigate to the project folder**
+   ```bash
+   cd marlins-affiliates-tracker
+   ```
+   
+5. **⚙️ Set up the Environment Variables**
+   <br/><br/>
+   Copy the `.env.example` file and rename it to `.env`. Then fill in any required values:
+
+   ```bash
+   cp .env.example .env
+   ```
+   
+7. **Install dependencies**
    ```bash
    pnpm install
    ```
 
-2. **Start the development server**
+8. **Start the development server**
    ```bash
    pnpm dev
    ```
 
-3. **Open your browser**
+9. **Open your browser**
    
    Navigate to [http://localhost:5173](http://localhost:5173) to view the application.
 
@@ -103,6 +113,8 @@ If you're testing the application and the selected date doesn't have games in al
    ```
 
 This will populate the interface with sample games in different states, allowing you to see all features in action.
+
+---
 
 ## 📸 Previews
 
