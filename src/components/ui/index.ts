@@ -1,3 +1,4 @@
+export { Toggle } from "./toogle/toogle.component"
 export { Badge } from "./badge/badge.component"
 export { Button } from "./button/button.component"
 export { DatePicker } from "./date-picker/date-picker.component"
@@ -6,3 +7,4 @@ export { Loader } from "./loader/loader.component"
 
 export * from "./popover/popover.component"
 export * from "./card/card.component"
+export * from "./toogle-group/toogle-group.component"
