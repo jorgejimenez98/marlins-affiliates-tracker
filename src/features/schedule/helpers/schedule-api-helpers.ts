@@ -66,7 +66,7 @@ class ScheduleApiHelper {
       }
       case "Live": {
         // Populate game summary for a live/in-progress game
-        this.fillLiveGame(summary, game, teams)
+        await this.fillLiveGame(summary, game, teams)
         break
       }
       case "Final": {
