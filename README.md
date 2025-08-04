@@ -15,13 +15,6 @@ Track the upcoming and recent games of the **Miami Marlins** and their **minor l
 - Multilanguage for English and Spanish
 ---
 
-## 📸 Previews
-
-| Desktop | Mobile | VS MLB Real Time Data |
-|-----------------|----------------| --------------------- |
-| ![Desktop View](/public/docs/desktop.png) | ![Mobile View](/public/docs/mobile.png) | ![Mobile View](/public/docs/vs-mlb-data.jpg) |
-
----
 
 ## 🛠️ Tech Stack
 
@@ -111,3 +104,19 @@ If you're testing the application and the selected date doesn't have games in al
 
 This will populate the interface with sample games in different states, allowing you to see all features in action.
 
+## 📸 Previews
+
+| Desktop | Mobile 
+|-----------------|----------------
+| ![Desktop View](/public/docs/desktop.png) | ![Mobile View](/public/docs/mobile.png) 
+
+| VS MLB Real Time Data (Marlins VS New York Yankees (Sun 08-03-2025) ) |
+| --------------------- |
+| ![vs-mlb-data](/public/docs/vs-mlb-data.jpg) |
+---
+
+
+| Lighthouse (Can be improved)|
+| --------------------- |
+| ![lighthouse](/public/docs/lighthouse.png) |
+---
