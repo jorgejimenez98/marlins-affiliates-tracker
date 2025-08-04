@@ -12,7 +12,7 @@ export function Skeleton({ className, cols, ...props }: SkeletonProperties) {
       {Array.from({ length: 4 }).map((_, i) => (
         <div
           key={i}
-          className="h-40 bg-accent animate-pulse rounded-md w-full"
+          className="h-40 bg-accent/30 dark:bg-accent animate-pulse rounded-md w-full"
         />
       ))}
     </div>
