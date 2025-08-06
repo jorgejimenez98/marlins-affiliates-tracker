@@ -1,5 +1,6 @@
 import { useEffect } from "react"
 
+import { parseISO, isValid } from "date-fns"
 import { useLocation } from "react-router-dom"
 
 import { useDateStore } from "@/stores"
@@ -13,8 +14,8 @@ export function useDateListener() {
     const dateParam = params.get("date")
 
     if (dateParam && /^\d{4}-\d{2}-\d{2}$/.test(dateParam)) {
-      const parsed = new Date(dateParam)
-      if (!isNaN(parsed.getTime())) {
+      const parsed = parseISO(dateParam)
+      if (isValid(parsed)) {
         onDateChange(parsed)
         return
       }
