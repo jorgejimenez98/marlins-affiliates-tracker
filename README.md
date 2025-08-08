@@ -2,7 +2,8 @@
 
 Track the upcoming and recent games of the **Miami Marlins** and their **minor league affiliates** in a clean, responsive interface.
 
-🌐 [Live Demo](https://marlins-affiliates-tracker.vercel.app)
+🌐 <a href="https://marlins-affiliates-tracker.vercel.app" target="_blank">Live Demo</a>  
+🌐 <a href="https://marlins-affiliates-tracker.vercel.app/schedule?date=2025-08-03" target="_blank">Demo with default date on query params</a>
 
 ---
 
@@ -114,6 +115,18 @@ If you're testing the application and the selected date doesn't have games in al
 
 This will populate the interface with sample games in different states, allowing you to see all features in action.
 
+---
+
+## Add default date
+
+If you want to see the data with a prepopulated date, please follow the steps below
+
+1. Open the [Live Demo](https://marlins-affiliates-tracker.vercel.app/schedule)
+
+2. Add a query param ```date``` with the format ```yyyy-mm-dd```:
+   ```
+   https://marlins..../schedule?date=2025-08-03
+   ```
 ---
 
 ## 📸 Previews
