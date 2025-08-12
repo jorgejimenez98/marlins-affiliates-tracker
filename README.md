@@ -2,8 +2,10 @@
 
 Track the upcoming and recent games of the **Miami Marlins** and their **minor league affiliates** in a clean, responsive interface.
 
-🌐 <a href="https://marlins-affiliates-tracker.vercel.app" target="_blank">Live Demo</a>  
-🌐 <a href="https://marlins-affiliates-tracker.vercel.app/schedule?date=2025-08-03" target="_blank">Demo with default date on query params</a>
+<a href="https://marlins-affiliates-tracker.vercel.app" target="_blank">Live Demo</a>  
+<a href="https://marlins-affiliates-tracker.vercel.app/schedule?date=2025-08-03" target="_blank">Demo with default date on query params</a>
+
+<a href="https://marlins-affiliates-tracker.vercel.app](https://drive.google.com/file/d/1kboA3llM-reF0MkBgRF8ZJEOUXGNpaZa/view)" target="_blank">Presentation PDF</a>  
 
 ---
 
