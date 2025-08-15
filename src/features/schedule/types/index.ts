@@ -1,3 +1,5 @@
+export type TeamSide = "home" | "away"
+
 export type GameState = "NO_GAME" | "NOT_STARTED" | "IN_PROGRESS" | "FINAL"
 
 export type GameStateFilter = GameState | "ALL"
@@ -68,10 +70,7 @@ export interface Game {
     abstractGameState: string
     detailedState: string
   }
-  teams: {
-    home: TeamInfo
-    away: TeamInfo
-  }
+  teams: TeamsParam
   venue: Venue
   linescore?: {
     currentInning?: number

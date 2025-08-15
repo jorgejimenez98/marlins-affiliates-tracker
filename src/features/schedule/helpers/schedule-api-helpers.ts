@@ -2,7 +2,7 @@
 import { format, type Locale } from "date-fns"
 
 import { HYDRATION_PARAMS, SPORT_IDS, TEAM_IDS } from "../constants"
-import type { Decision, Game, GameSummary, LiveFeedResponse, SmallTeamInfo, TeamsParam, Venue } from "../types"
+import type { Decision, Game, GameSummary, LiveFeedResponse, SmallTeamInfo, TeamSide, TeamsParam, Venue } from "../types"
 
 
 import { ENDPOINTS } from "@/lib/constants"
@@ -34,16 +34,27 @@ class ScheduleApiHelper {
     }))
   }
 
+
+  getTeamSides(teams: TeamsParam): { teamSide: TeamSide; oppSide: TeamSide } | null {
+    if (TEAM_IDS.includes(teams.home.team.id)) {
+      return { teamSide: "home", oppSide: "away" }
+    }
+
+    if (TEAM_IDS.includes(teams.away.team.id)) {
+      return { teamSide: "away", oppSide: "home" }
+    }
+
+    return null
+  }
+
   // Fills a specific team's summary based on game data and game state
   async fillGameSummary(game: Game, summaries: GameSummary[], locale: Locale) {
     const { teams, status, decisions } = game
 
-    const isHome = TEAM_IDS.includes(teams.home.team.id)
-    const isAway = TEAM_IDS.includes(teams.away.team.id)
-    if (!isHome && !isAway) return
+    const sides = this.getTeamSides(teams)
+    if (!sides) return
 
-    const teamSide = isHome ? "home" : "away"
-    const oppSide = isHome ? "away" : "home"
+    const { teamSide, oppSide } = sides
     const teamId = teams[teamSide].team.id
 
     const summaryIndex = summaries.findIndex(s => s.teamId === teamId)
@@ -60,21 +71,19 @@ class ScheduleApiHelper {
 
     switch (status.abstractGameState) {
       case "Preview": {
-        // Populate game summary for a not-yet-started game
-        this.fillPreviewGame(summary, game, locale)
+        this.fillPreviewGame(summary, game, locale, teamSide)
         break
       }
       case "Live": {
-        // Populate game summary for a live/in-progress game
-        await this.fillLiveGame(summary, game, teams)
+        await this.fillLiveGame(summary, game, teams, teamSide, oppSide)
         break
       }
       case "Final": {
-        // Populate game summary for a completed game
-        this.fillFinalGame(summary, teams, decisions!)
+        this.fillFinalGame(summary, teams, decisions!, teamSide, oppSide)
         break
       }
     }
+
 
     summaries[summaryIndex] = summary
   }
@@ -91,31 +100,30 @@ class ScheduleApiHelper {
   }
 
   // Fills preview (not started) game data into summary
-  fillPreviewGame(summary: GameSummary, game: Game, locale: Locale) {
+  fillPreviewGame(summary: GameSummary, game: Game, locale: Locale, teamSide: TeamSide) {
     summary.state = "NOT_STARTED"
     summary.venue = this.getVenue(game.venue)
-
     summary.gameTime = format(game.gameDate, "hh:mm a", { locale })
 
     const homePitcher = game.teams.home.probablePitcher?.fullName
     const awayPitcher = game.teams.away.probablePitcher?.fullName
 
-    if (homePitcher || awayPitcher) {
-      summary.probablePitchers = {
-        home: homePitcher,
-        away: awayPitcher
-      }
+    summary.probablePitchers = {
+      home: teamSide === "home" ? homePitcher : awayPitcher,
+      away: teamSide === "home" ? awayPitcher : homePitcher
     }
+
   }
 
   // Fills live game data, including current inning, outs, and runners on base
-  fillFinalGame(summary: GameSummary, teams: TeamsParam, decisions: Decision) {
+  fillFinalGame(summary: GameSummary, teams: TeamsParam, decisions: Decision, teamSide: TeamSide, oppSide: TeamSide) {
     summary.state = "FINAL"
 
     summary.score = {
-      home: teams.home.score ?? 0,
-      away: teams.away.score ?? 0
+      home: teams[teamSide].score ?? 0,
+      away: teams[oppSide].score ?? 0
     }
+
     summary.pitchersOfRecord = {
       win: decisions?.winner?.fullName,
       loss: decisions?.loser?.fullName,
@@ -123,7 +131,7 @@ class ScheduleApiHelper {
     }
   }
 
-  async fillLiveGame(summary: GameSummary, game: Game, teams: TeamsParam) {
+  async fillLiveGame(summary: GameSummary, game: Game, teams: TeamsParam, teamSide: TeamSide, oppSide: TeamSide) {
     summary.state = "IN_PROGRESS"
     summary.venue = this.getVenue(game.venue)
 
@@ -135,8 +143,8 @@ class ScheduleApiHelper {
       summary.inningHalf = ls?.inningHalf
       summary.outs = ls?.outs
       summary.score = {
-        home: ls?.teams?.home?.runs ?? 0,
-        away: ls?.teams?.away?.runs ?? 0
+        home: ls?.teams?.[teamSide]?.runs ?? 0,
+        away: ls?.teams?.[oppSide]?.runs ?? 0
       }
 
       summary.atBat = ls?.offense?.batter?.fullName
@@ -149,8 +157,8 @@ class ScheduleApiHelper {
 
     } catch {
       summary.score = {
-        home: teams.home.score ?? 0,
-        away: teams.away.score ?? 0
+        home: teams[teamSide].score ?? 0,
+        away: teams[oppSide].score ?? 0
       }
       summary.runnersOnBase = []
     }
